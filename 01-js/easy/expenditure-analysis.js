@@ -9,7 +9,23 @@
 */
 
 function calculateTotalSpentByCategory(transactions) {
-  return [];
+  let hsmap=new Map();
+  transactions.map((item)=>{
+      let temp=0;
+      if(hsmap.has(item.category)){
+      temp=hsmap.get(item.category);}
+      temp+=item.price;
+      hsmap.set(item.category,temp);
+  })
+//   console.log(hsmap);
+  let ans=[];
+  for (let [key, value] of hsmap) {
+     let obj = {};
+    obj["category"] = key;
+    obj["totalSpent"] = value;
+      ans.push(obj);
+}
+  return ans;
 }
 
 module.exports = calculateTotalSpentByCategory;
